@@ -1,2 +1,3 @@
-const num: number = 10;
-console.log(num ** 2);
+import { startApp } from './app/app';
+
+startApp();

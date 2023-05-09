@@ -8,8 +8,8 @@
     "start:prod": "tsc && node ./dist/index.js",
     "format": "prettier --check \"src/**/*.ts\"",
     "format:write": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint --fix \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
