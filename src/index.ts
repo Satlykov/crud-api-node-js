@@ -1,3 +1,2 @@
-import fs from 'fs';
-
-fs;
+const num: number = 10;
+console.log(num ** 2);
