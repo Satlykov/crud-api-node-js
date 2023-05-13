@@ -1,16 +1,16 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { Buffer } from 'node:buffer';
 import {
     INVALID_OPERATION,
     NOT_FOUND_ERROR,
     UNEXPECTED_ERROR,
     UNSUPPORTED_OPERATION,
 } from './messages';
+import { NotFoundError, ValidationError } from './models/errors';
 import { UserService } from './services/user.service';
+import { UsersBase } from './usersBase';
 
-const userService = new UserService();
-class ValidationError extends Error {}
-class NotFoundError extends Error {}
+const userBase = new UsersBase();
+const userService = new UserService(userBase);
 export const requestListener = async (
     message: IncomingMessage,
     response: ServerResponse
@@ -36,7 +36,6 @@ export const requestListener = async (
     );
 
     const buffers: any[] = [];
-
     for await (const chunk of message) {
         buffers.push(chunk);
     }
