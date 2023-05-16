@@ -35,11 +35,11 @@ export const requestListener = async (
         !!rest.length + ';'
     );
 
-    const buffers: any[] = [];
+    const body: Buffer[] = [];
     for await (const chunk of message) {
-        buffers.push(chunk);
+        body.push(chunk);
     }
-    const requestBody = Buffer.concat(buffers).toString();
+    const requestBody = Buffer.concat(body).toString();
 
     const isCorrectBaseUrl = () =>
         api === 'api' && users === 'users' && !rest.length;

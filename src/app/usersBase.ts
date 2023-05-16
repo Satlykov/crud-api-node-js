@@ -16,4 +16,17 @@ export class UsersBase extends EventEmitter {
             resolve(user);
         });
     }
+
+    async update(id: string, input: Partial<User>): Promise<User> {
+        return new Promise( (resolve) => {
+            const user = async () => Object.assign(await this.findOne(id), input);
+            resolve(user());
+        });
+    }
+
+    async findOne(id: string): Promise<User> {
+        return new Promise((resolve) => {
+            resolve(this.users.filter((item) => item.id === id)[0]);
+        });
+    }
 }

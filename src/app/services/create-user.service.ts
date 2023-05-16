@@ -1,14 +1,17 @@
-import { User, UserInput } from '../models/user';
-import { ValidationError } from '../models/errors';
-import { INVALID_FORMAT } from '../messages';
+import { ValidationError } from "../models/errors";
+import { INVALID_FORMAT, INVALID_BODY } from "../messages";
 
-export class UserConverterService {
-    static createUserDto(input: string): UserInput {
-        let userDto: UserInput;
+export class CreateUser {
+    username: string;
+    age: number;
+    hobbies: string[];
+
+    static createUser(input: string): CreateUser {
+        let userDto: CreateUser;
         try {
             userDto = JSON.parse(input);
         } catch (err) {
-            console.log('1 - ValidationError');
+            console.log(err);
             throw new ValidationError(INVALID_FORMAT);
         }
 
@@ -20,7 +23,7 @@ export class UserConverterService {
         return userDto;
     }
 
-    static isValidUserBody(userDto: UserInput | User): void {
+    static isValidUserBody(userDto: CreateUser): void {
         if (
             !(typeof userDto.username === 'string' &&
             typeof userDto.age === 'number' &&
@@ -29,12 +32,10 @@ export class UserConverterService {
                 ? userDto.hobbies.every((item) => typeof item !== 'string')
                 : true)
         ) {
-            console.log('2 - ValidationError');
-            throw new ValidationError(INVALID_FORMAT);
+            throw new ValidationError(INVALID_BODY);
         }
         if (!userDto.username.trim()) {
-            console.log('3 - ValidationError');
-            throw new ValidationError(INVALID_FORMAT);
+            throw new ValidationError(INVALID_BODY);
         }
     }
 }
