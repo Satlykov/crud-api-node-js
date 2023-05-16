@@ -1,10 +1,10 @@
 import { User, UserInput } from '../models/user';
 import { UsersBase } from '../usersBase';
-import { CreateUser } from "./create-user.service";
+import { CreateUser } from './create-user.service';
 import * as uuid from 'uuid';
-import {NotFoundError, ValidationError} from "../models/errors";
-import {NOT_FOUND_ERROR, USERID_INVALID} from "../messages";
-import {UpdateUser} from "./update-user.service";
+import { NotFoundError, ValidationError } from '../models/errors';
+import { NOT_FOUND_ERROR, USERID_INVALID } from '../messages';
+import { UpdateUser } from './update-user.service';
 
 export class UserService {
     constructor(private base: UsersBase) {}
@@ -17,7 +17,7 @@ export class UserService {
     }
 
     async createUser(input: string): Promise<User> {
-        const body: UserInput =  CreateUser.createUser(input);
+        const body: UserInput = CreateUser.createUser(input);
         return this.base.createUser(body);
     }
     async updateUser(id: string, input: string): Promise<User> {
@@ -34,7 +34,7 @@ export class UserService {
 
     validateUserId(id: string) {
         if (!uuid.validate(id)) {
-            throw new ValidationError(USERID_INVALID)
+            throw new ValidationError(USERID_INVALID);
         }
     }
 
@@ -46,5 +46,4 @@ export class UserService {
         }
         return user;
     }
-
 }

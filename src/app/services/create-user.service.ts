@@ -1,5 +1,5 @@
-import { ValidationError } from "../models/errors";
-import { INVALID_FORMAT, INVALID_BODY } from "../messages";
+import { ValidationError } from '../models/errors';
+import { INVALID_FORMAT, INVALID_BODY } from '../messages';
 
 export class CreateUser {
     username: string;

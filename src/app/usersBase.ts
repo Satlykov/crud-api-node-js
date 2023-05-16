@@ -18,8 +18,9 @@ export class UsersBase extends EventEmitter {
     }
 
     async update(id: string, input: Partial<User>): Promise<User> {
-        return new Promise( (resolve) => {
-            const user = async () => Object.assign(await this.findOne(id), input);
+        return new Promise((resolve) => {
+            const user = async () =>
+                Object.assign(await this.findOne(id), input);
             resolve(user());
         });
     }
