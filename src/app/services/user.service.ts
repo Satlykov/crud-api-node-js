@@ -13,13 +13,21 @@ export class UserService {
     }
 
     async getOneUser(id: string): Promise<User> {
-        return;
+        this.validateUserId(id);
+        const user = await this.base.findOne(id);
+
+        if (!user) {
+            throw new NotFoundError(NOT_FOUND_ERROR);
+        }
+
+        return user;
     }
 
     async createUser(input: string): Promise<User> {
         const body: UserInput = CreateUser.createUser(input);
         return this.base.createUser(body);
     }
+
     async updateUser(id: string, input: string): Promise<User> {
         this.validateUserId(id);
         const body: UpdateUser = UpdateUser.updateUser(input);
@@ -29,7 +37,9 @@ export class UserService {
     }
 
     async deleteUser(id: string): Promise<any> {
-        return;
+        this.validateUserId(id);
+        await this.findOne(id);
+        return this.base.deleteUser(id);
     }
 
     validateUserId(id: string) {

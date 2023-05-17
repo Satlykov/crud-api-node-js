@@ -30,4 +30,16 @@ export class UsersBase extends EventEmitter {
             resolve(this.users.filter((item) => item.id === id)[0]);
         });
     }
+
+    async deleteUser(id: string): Promise<User> {
+        return new Promise((resolve) => {
+            const index = this.users.findIndex((item) => item.id === id);
+            if (index != -1) {
+                const user = this.users.splice(index, 1)[0];
+                resolve(user);
+            }
+
+            resolve(undefined);
+        })
+    }
 }
