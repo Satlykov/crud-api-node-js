@@ -32,6 +32,10 @@ Run tests scenarios for API
 ```
 npm test
 ```
+or in watch mode
+```
+npm test:watch
+```
 
 The CRUD haven't the cluster mode with the load balancer. 😥
 

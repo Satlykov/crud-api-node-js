@@ -17,23 +17,9 @@ export const requestListener = async (
 ) => {
     response.setHeader('Content-Type', 'application/json');
 
-    const host = message.headers.host;
     const [api, users, userId, ...rest] = message.url
         .split('/')
         .filter(Boolean);
-
-    console.log(
-        'Host:',
-        host + ';',
-        'Is api:',
-        (api === 'api') + ';',
-        'Is users:',
-        (users === 'users') + ';',
-        'Id:',
-        userId + ';',
-        'Is have rest params:',
-        !!rest.length + ';'
-    );
 
     const body: Buffer[] = [];
     for await (const chunk of message) {

@@ -29,11 +29,12 @@ export class CreateUser {
             typeof userDto.age === 'number' &&
             Array.isArray(userDto.hobbies) &&
             userDto.hobbies.length
-                ? userDto.hobbies.every((item) => typeof item !== 'string')
+                ? userDto.hobbies.every((item) => typeof item === 'string')
                 : true)
         ) {
             throw new ValidationError(INVALID_BODY);
         }
+
         if (!userDto.username.trim()) {
             throw new ValidationError(INVALID_BODY);
         }
